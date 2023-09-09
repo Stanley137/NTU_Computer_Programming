@@ -14,17 +14,17 @@ int main(){
         int det_b = (v2x*v1y) - (v2y*v1x);
         // here might cause overflow
         // printf("%d\n%d\n%d\n", det_a, det_b, (long long)(det_a) * (long long)(det_b));
-        det_a = (det_a < 0) ? -1 : 1;
-        det_b = (det_b < 0) ? -1 : 1;
-        if(det_a * det_b < 0){
+        // det_a = (det_a < 0) ? -1 : 1;
+        // det_b = (det_b < 0) ? -1 : 1;
+        if((det_a<0 && det_b>0) || (det_a>0 && det_b<0)){
             // p3 is diag
         }
         else{
             det_a = (v1x*v2y) - (v1y*v2x);
             det_b = (v1x*v3y) - (v1y*v3x);
-            det_a = (det_a < 0) ? -1 : 1;
-            det_b = (det_b < 0) ? -1 : 1;
-            if(det_a * det_b < 0){ // p2 is diag
+            // det_a = (det_a < 0) ? -1 : 1;
+            // det_b = (det_b < 0) ? -1 : 1;
+            if((det_a<0 && det_b>0) || (det_a>0 && det_b<0)){ // p2 is diag
                 temp = x2;
                 x2 = x3;
                 x3 = temp;
