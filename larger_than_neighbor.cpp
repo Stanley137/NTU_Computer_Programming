@@ -12,8 +12,8 @@ int main(){
         for(int j=0;j<c;j++)
             scanf("%d", &arr[i][j]);
     }
-    for(int j=0;j<c;j++){
-        for(int i=0;i<r;i++){
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
             // printf("%d\n", arr[i][j]);  
             int flag = 0;
             // right
