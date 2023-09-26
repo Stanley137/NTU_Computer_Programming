@@ -43,8 +43,9 @@ int main(){
     }
     for(int i=first_s;i<=first_e;i++)
         printf("%d ",arr[i]);
-    for(int i=second_s;i<=second_e;i++)
+    for(int i=second_s;i<second_e;i++)
         printf("%d ",arr[i]);
+    printf("%d", arr[second_e]); // without space
     // debug
     // for(int i=0;i<n;i++){
     //     for(int j=i;j<n;j++){
