@@ -117,12 +117,20 @@ int main()
 {
     int pins[16][16][3][2];
     int N;
-    scanf("%d", &N);
+    while(scanf("%d", &N) != EOF){
     for (int row = 0; row < N; row++)
     {
         for (int col = 0; col <= row; col++)
         {
-            scanf("%d%d", &pins[row][col][0][0], &pins[row][col][1][0]);
+            scanf("%d %d", &pins[row][col][0][0], &pins[row][col][1][0]);
+            // factorize(row, col, pins);
+        }
+    }
+    for (int row = 0; row < N; row++)
+    {
+        for (int col = 0; col <= row; col++)
+        {
+            //scanf("%d%d", &pins[row][col][0][0], &pins[row][col][1][0]);
             factorize(row, col, pins);
         }
     }
@@ -134,13 +142,14 @@ int main()
     for (int row = N, col = 0; col <= row; col++)
         printf("%d/%d\n", pins[row][col][2][0], pins[row][col][2][1]);
 // print debug
-#ifdef DEBUG
-    for (int row = 0; row < N; row++)
-    {
-        for (int col = 0; col <= row; col++)
-            printf("%d %d ", pins[row][col][1][0], pins[row][col][1][1]);
-        printf("\n");
+// #ifndef DEBUG
+//     for (int row = 0; row < N; row++)
+//     {
+//         for (int col = 0; col <= row; col++){}
+//             //printf("%d %d ", pins[row][col][1][0], pins[row][col][1][1]);
+//         //printf("\n");
+//     }
+// #endif
     }
-#endif
     return 0;
 }
