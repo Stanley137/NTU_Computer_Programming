@@ -8,7 +8,7 @@ void merge(int A[], int B[], int* a[], int* b[]){
     // int b_len = *(&b+1) - b;
     int now_A, a_full = 0, b_full = 0;
     // debugging with NULL
-    while(1){
+    while((b_full && a[B_index] == NULL) || (a_full && b[B_index] == NULL)){
         printf("A_index: %d, B_index: %d\n",A_index,B_index);
         printf("%d %d\n", a_full, b_full);
         if((A[A_index] < B[B_index]) && !a_full){
