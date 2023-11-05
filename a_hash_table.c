@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#define C 80
+#define C 10000
 #define LEN 101
+char hash_table[1000][C][LEN] = {"\0"};
 int calc_key(char str[], int S){
     int len = strlen(str);
     int sum = 0;
@@ -27,15 +28,14 @@ int find_table(char hash_table[1000][C][LEN], int key, char str[]){
     for(int i=0;i<C;i++){
         if(strcmp(hash_table[key][i], str) == 0)
             return key;
-        // else if(strcmp(hash_table[key][i], "\0") == 0)
-        //     break;
+        else if(strcmp(hash_table[key][i], "\0") == 0)
+            break;
     }
     return -1;
 }
 int main(){
     int S, N, Q;
     scanf("%d%d%d", &S, &N, &Q);
-    char hash_table[1000][C][LEN] = {"\0"};
     char str[LEN];
     for(int i=0;i<N;i++){ // insert
         scanf("%s", str);
