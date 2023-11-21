@@ -9,21 +9,26 @@ bool in_lake(int row,int col,int N,int M){
         return true;
     return false;
 }
-int find_lakes(int row,int col,int sum,int N,int M,int lakes[450][450]){ // before this recursion's sum
-    int right = 0,left = 0 ,up = 0,down = 0;
-    if(!(in_lake(row,col,N,M)))
+int find_lakes(int row,int col,int N,int M,int lakes[450][450]){ 
+    int right,left,up,down;
+    if(lakes[row][col]==0 || !in_lake(row,col,N,N))
         return 0;
-    if(lakes[row][col]==0)
-        return sum;
     lakes[row][col] = 0; // lakes[row][col] = 1
-    printf("sum: %d, row: %d, col: %d\n",sum,row,col);
-    return sum + find_lakes(row+1,col,sum+1,N,M,lakes) + 
-            find_lakes(row-1,col,sum+1,N,M,lakes) + find_lakes(row,col+1,sum+1,N,M,lakes); + 
-            find_lakes(row,col-1,sum+1,N,M,lakes);
+    //printf("row: %d, col: %d\n",row,col);
+    // if(in_lake(row+1,col,N,M))
+    down = find_lakes(row+1,col,N,M,lakes);
+    //else if(in_lake(row-1,col,N,M))
+    up = find_lakes(row-1,col,N,M,lakes);
+    //else if(in_lake(row,col+1,N,M))
+    right = find_lakes(row,col+1,N,M,lakes);
+    //else if(in_lake(row,col-1,N,M))
+    left = find_lakes(row,col-1,N,M,lakes);
+    return 1 + (right + left + up + down);
 }
+int arr[90005];
 int main(){
     int lakes[450][450];
-    int arr[16001],idx=0;
+    int idx=0;
     int N,M;
     scanf("%d%d", &N,&M);
     for(int i=0;i<N;i++){
@@ -34,13 +39,18 @@ int main(){
         for(int j=0;j<M;j++){
             if(lakes[i][j] == 0)
                 continue;
-            int num = find_lakes(i,j,0,N,M,lakes);
+            int num = find_lakes(i,j,N,M,lakes);
+            // if(num==1)
+            //     continue;
+            //printf("%d\n",num);     
             arr[idx] = num;
             idx++;
+            break;
         }
     }
     qsort(arr,idx,sizeof(int),cmp);
-    for(int i=idx-1;i>=0;i--)
+    for(int i=idx-1;i>=0 && arr[i]!=0;i--){
         printf("%d\n",arr[i]);
+    }
     return 0;
 }
