@@ -11,21 +11,23 @@ bool in_lake(int row,int col,int N,int M){
 }
 int find_lakes(int row,int col,int N,int M,int lakes[450][450]){ 
     int right,left,up,down;
-    if(lakes[row][col]==0 || !in_lake(row,col,N,N))
+    if(!in_lake(row,col,N,M)) //// fuck 
+        return 0;
+    if(lakes[row][col]==0)
         return 0;
     lakes[row][col] = 0; // lakes[row][col] = 1
     //printf("row: %d, col: %d\n",row,col);
     // if(in_lake(row+1,col,N,M))
-    down = find_lakes(row+1,col,N,M,lakes);
+    down = find_lakes(row-1,col,N,M,lakes);
     //else if(in_lake(row-1,col,N,M))
-    up = find_lakes(row-1,col,N,M,lakes);
+    up = find_lakes(row+1,col,N,M,lakes);
     //else if(in_lake(row,col+1,N,M))
     right = find_lakes(row,col+1,N,M,lakes);
     //else if(in_lake(row,col-1,N,M))
     left = find_lakes(row,col-1,N,M,lakes);
     return 1 + (right + left + up + down);
 }
-int arr[90005];
+int arr[80005];
 int main(){
     int lakes[450][450];
     int idx=0;
@@ -45,7 +47,6 @@ int main(){
             //printf("%d\n",num);     
             arr[idx] = num;
             idx++;
-            break;
         }
     }
     qsort(arr,idx,sizeof(int),cmp);
@@ -53,4 +54,4 @@ int main(){
         printf("%d\n",arr[i]);
     }
     return 0;
-}
+}   
