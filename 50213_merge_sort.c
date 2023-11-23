@@ -22,7 +22,7 @@ void merge(int arr[],int l_start,int l_end,int r_start,int r_end){
             tmp[index] = arr[left];
             left++;
         }
-        else if(arr[left]<arr[right]){
+        else if(arr[left]<=arr[right]){
             tmp[index] = arr[left];
             left++;
         }
@@ -34,7 +34,7 @@ void merge(int arr[],int l_start,int l_end,int r_start,int r_end){
         index++;
     }
     for(int i=l_start;i<=r_end;i++){
-        // printf("i: %d, arr[i]: %d\n",i,arr[i]);
+        //printf("i: %d, arr[i]: %d\n",i,arr[i]);
         arr[i] = tmp[i];
     }    
 }
@@ -42,7 +42,8 @@ void merge_sort(int arr[],int start,int end){
     print_arr(arr,start,end);
     if(start==end)
         return;
-    int mid = (start+end)/2;
+    int N = (end-start+1)/2;
+    int mid = start + (N -1);
     merge_sort(arr,start,mid);
     merge_sort(arr,mid+1,end);
     //printf("start: %d, end: %d,mid: %d\n",start,end,mid);
