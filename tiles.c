@@ -5,48 +5,76 @@ struct tile
     int y;
 };
 typedef struct tile Tile;
-int check(int x,int y,int l,int m){
-    if(x==l-m && y==l-m){
-        //printf("%d %d\n", x, y);
-        return 1;
-    }
-    else if(x<=0 || y<=0 || x>=l || y>=l || (x==l-m || y==l-m))
-        return 0;
-    else 
-        return 1;
-}
+// int check(int type,int x,int y,int last_x,int last_y){
+//     if(type==0){
+//         if(x<last_x && y<last_y)
+//             return 1;
+//         else
+//             return 0;
+//     }
+//     else if(type==1){
+//         if(x>last_x && y<last_y)
+//             return 1;
+//         else
+//             return 0;
+//     }
+//     else if(type==2){
+//         if(x>last_x && y>last_y)
+//             return 1;
+//         else
+//             return 0;
 
-void put_tile(int type,Tile tiles[],int x, int y,int l,int m){
-    if(check(x,y,l,m)){
-        printf("%d %d %d\n", type+1,x,y);
-        if(type == 0){ 
-            put_tile(3, tiles, x+tiles[3].x, y+tiles[3].y,l,m);
-            put_tile(0, tiles, x+tiles[0].x, y+tiles[0].y,l,m);
-            put_tile(1, tiles, x+tiles[1].x, y+tiles[1].y,l,m);
+//     }
+//     else if(type==3){
+//         if(x<last_x && y>last_y)
+//             return 1;
+//         else 
+//             return 0;
+//     }
+// }
+
+void put_tile(int type,Tile tiles[],int x,int y,int length,int l,int m){ // length represent sliced length
+    if(x>l-m && y>l-m)
+        return;
+    if(length>=1){
+        printf("%d %d %d\n",type+1,x,y);
+        length /= 2;
+        if(type==0){
+            put_tile(0,tiles,x-length,y-length,length,l,m);
+            put_tile(3,tiles,x-length,y+length,length,l,m);
+            put_tile(1,tiles,x+length,y-length,length,l,m);
+            put_tile(0,tiles,x+length,y+length,length,l,m);
         }
-        else if(type == 1){
-            put_tile(0, tiles, x+tiles[0].x, y+tiles[0].y, l, m);
-            put_tile(1, tiles, x+tiles[1].x, y+tiles[1].y, l, m);
-            put_tile(2, tiles, x+tiles[2].x, y+tiles[2].y, l, m);
+        else if(type ==1){
+            put_tile(1,tiles,x+length,y-length,length,l,m);
+            put_tile(2,tiles,x+length,y+length,length,l,m);
+            put_tile(0,tiles,x-length,y-length,length,l,m);
+            put_tile(1,tiles,x-length,y+length,length,l,m);
         }
-        else if(type == 2){
-            put_tile(1, tiles, x+tiles[1].x, y+tiles[1].y, l, m);
-            put_tile(2, tiles, x+tiles[2].x, y+tiles[2].y, l, m);
-            put_tile(3, tiles, x+tiles[3].x, y+tiles[3].y, l, m);
+        else if(type==2){
+            put_tile(2,tiles,x+length,y+length,length,l,m);
+            put_tile(3,tiles,x-length,y+length,length,l,m);
+            put_tile(1,tiles,x+length,y-length,length,l,m);
+            put_tile(2,tiles,x-length,y-length,length,l,m);
         }
-        else if(type == 3){
-            put_tile(2, tiles, x+tiles[2].x, y+tiles[2].y, l, m);
-            put_tile(3, tiles, x+tiles[3].x, y+tiles[3].y, l, m);
-            put_tile(0, tiles, x+tiles[0].x, y+tiles[0].y, l, m);
+        else if(type==3){
+            put_tile(3,tiles,x-length,y+length,length,l,m);
+            put_tile(2,tiles,x+length,y+length,length,l,m);
+            put_tile(0,tiles,x-length,y-length,length,l,m);
+            put_tile(3,tiles,x+length,y-length,length,l,m);
         }
     }
-    else
-        return;
+    return;
 }
 int main(){
     int l, m;
     scanf("%d%d", &l,&m);
     Tile tiles[4] = {{-1,-1}, {1,-1}, {1,1}, {-1,1}};
-    put_tile(0,tiles,l-m,l-m,l,m);
+    int x = l/2,y=l/2;
+    printf("%d %d %d\n",1,x,y);
+    put_tile(2,tiles,x+l/4,y+l/4,l/4,l,m);
+    put_tile(0,tiles,x-l/4,y-l/4,l/4,l,m);
+    put_tile(3,tiles,x-l/4,y+l/4,l/4,l,m);
+    put_tile(1,tiles,x+l/4,y-l/4,l/4,l,m);
     return 0;
 }
