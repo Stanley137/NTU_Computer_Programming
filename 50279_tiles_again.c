@@ -12,11 +12,11 @@ void fill_tiles(P center,P hole,int len){
     int l = len / 2;
     P new_center;
     P new_hole;
-    printf("center: %d %d\n",center.x,center.y);
-    printf("hole: %d %d\n",hole.x,hole.y);
-    printf("len: %d\n", len);
-    printf("center: %p\n", &new_center);
-    printf("hole: %p\n", &new_hole);
+    // printf("center: %d %d\n",center.x,center.y);
+    // printf("hole: %d %d\n",hole.x,hole.y);
+    // printf("len: %d\n", len);
+    // printf("center: %p\n", &new_center);
+    // printf("hole: %p\n", &new_hole);
     if((hole.x - center.x)>=0 && (hole.y- center.y)>=0){
         printf("1 %d %d\n",center.x,center.y);
         // 1
@@ -24,33 +24,33 @@ void fill_tiles(P center,P hole,int len){
         fill_tiles(new_center,hole,l);
         // 2
         new_center.x = center.x - l; new_center.y = center.y + l;
-        new_hole.x = hole.x - 1; new_hole.y = hole.y;
+        new_hole.x = center.x - 1; new_hole.y = center.y;
         fill_tiles(new_center,new_hole,l);
         // 3
         new_center.x = center.x - l; new_center.y = center.y - l;
-        new_hole.x = hole.x - 1; new_hole.y = hole.y - 1;
+        new_hole.x = center.x - 1; new_hole.y = center.y - 1;
         fill_tiles(new_center,new_hole,l);
         // 4
         new_center.x = center.x + l; new_center.y = center.y - l;
-        new_hole.x = hole.x; new_hole.y = hole.y - 1;
+        new_hole.x = center.x; new_hole.y = center.y - 1;
         fill_tiles(new_center,new_hole,l);
     }
-    else if((hole.x - center.x<0) && (hole.y- center.y)>=0){
+    else if(((hole.x - center.x)<0) && (hole.y- center.y)>=0){
         printf("2 %d %d\n", center.x, center.y);
         // 2
         new_center.x = center.x - l; new_center.y = center.y + l;
         fill_tiles(new_center,hole,l);
         // 3
         new_center.x = center.x - l; new_center.y = center.y - l;
-        new_hole.x = hole.x - 1; new_hole.y = hole.y - 1;
+        new_hole.x = center.x - 1; new_hole.y = center.y - 1;
         fill_tiles(new_center,new_hole,l);
         // 4
         new_center.x = center.x + l; new_center.y = center.y - l;
-        new_hole.x = hole.x; new_hole.y = hole.y - 1;
+        new_hole.x = center.x; new_hole.y = center.y - 1;
         fill_tiles(new_center,new_hole,l);
          // 1
         new_center.x = center.x + l; new_center.y = center.y + l;
-        new_hole.x = hole.x; new_hole.y = hole.y;
+        new_hole.x = center.x; new_hole.y = center.y;
         fill_tiles(new_center,new_hole,l);
     }
     else if((hole.x - center.x>=0) && (hole.y- center.y)<0){
@@ -60,15 +60,15 @@ void fill_tiles(P center,P hole,int len){
         fill_tiles(new_center,hole,l);
         // 1
         new_center.x = center.x + l; new_center.y = center.y + l;
-        new_hole.x = hole.x; new_hole.y = hole.y;
+        new_hole.x = center.x; new_hole.y = center.y;
         fill_tiles(new_center,new_hole,l);
         // 2
         new_center.x = center.x - l; new_center.y = center.y + l;
-        new_hole.x = hole.x - 1; new_hole.y = hole.y + 1;
+        new_hole.x = center.x - 1; new_hole.y = center.y;
         fill_tiles(new_center,new_hole,l);
         // 3
         new_center.x = center.x - l; new_center.y = center.y - l;
-        new_hole.x = hole.x - 1; new_hole.y = hole.y - 1;
+        new_hole.x = center.x - 1; new_hole.y = center.y - 1;
         fill_tiles(new_center,new_hole,l);
 
     }
@@ -79,15 +79,15 @@ void fill_tiles(P center,P hole,int len){
         fill_tiles(new_center,hole,l);
         // 4
         new_center.x = center.x + l; new_center.y = center.y - l;
-        new_hole.x = hole.x; new_hole.y = hole.y-1;
+        new_hole.x = center.x; new_hole.y = center.y-1;
         fill_tiles(new_center,new_hole,l);
         // 1
         new_center.x = center.x + l; new_center.y = center.y + l;
-        new_hole.x = hole.x; new_hole.y = hole.y;
+        new_hole.x = center.x; new_hole.y = center.y;
         fill_tiles(new_center,new_hole,l);
         // 2
         new_center.x = center.x - l; new_center.y = center.y + l;
-        new_hole.x = hole.x-1; new_hole.y = hole.y;
+        new_hole.x = center.x-1; new_hole.y = center.y;
         fill_tiles(new_center,new_hole,l);
     }
     return;
