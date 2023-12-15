@@ -13,27 +13,20 @@ int min(int a,int b){
 }
 
 int distance(char *str1,char *str2){
-    int len1 = strlen(str1);
-    int len2 = strlen(str2); 
-    if(strcmp(str1,str2)==0)
-        return 0;
-    if(len1 == 0 && len2 == 0)
-        return 0;
-    if(len1 == 0 && len2 != 0)
-        return len2;
-    if(len1 !=0 && len2 == 0)
-        return len1;
+    if(str1[0] == '\0')
+        return strlen(str2);
+    if(str2[0] == '\0')
+        return strlen(str1);
     if(str1[0] == str2[0]){
         str1+=1;
         str2+=1;
         return distance(str1,str2);
     }
-    else
-        return 1 + min(distance(str1,str2+1),distance(str1+1,str2));
+    return 1 + min(distance(str1,str2+1),distance(str1+1,str2));
 }
 
 int main(){
-    string str_structs[100];
+    string str_structs[105];
     int idx_counter = 3;
     int min_index1,min_index2;
     int dis,min_dis;

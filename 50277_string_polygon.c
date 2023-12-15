@@ -24,7 +24,7 @@ int polygon_sum(char *first_str,int first_offset,char *split_str,char same,int s
         if(scanf("%s", str)!=EOF){
             int offset0 = find_offset(split_str,same);
             int len = strlen(str);
-            int max_sum = INT_MIN;
+            int max_sum = INT_MIN;  
             for(int i=0;i<len;i++){
                 char *p = strchr(split_str, str[i]);
                 if(p!=NULL){
@@ -36,6 +36,9 @@ int polygon_sum(char *first_str,int first_offset,char *split_str,char same,int s
         }
         else{ // in the end compare split_str with first_str
             // split_str
+            int offset0 = find_offset(split_str, same);
+            
+            // first_str
                         
         }
     }
